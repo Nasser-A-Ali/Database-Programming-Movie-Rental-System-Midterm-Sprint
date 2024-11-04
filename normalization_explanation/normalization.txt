@@ -1,0 +1,10 @@
+Normalization
+
+Movies Table:
+All attributes depend solely on the primary key. Each movie's title, release year, genre, and director can be uniquely identified by the id. There are no transitive dependencies (e.g., changing the director or title of a movie does not affect other attributes).
+
+Customers Table:
+All attributes depend solely on the primary key. Each customer's first name, last name, email, and phone number can be uniquely identified by the id. There are no transitive dependencies (e.g., changing a customer’s phone number does not affect their name or email).
+
+Rentals Table:
+All attributes depend solely on the primary key. The rental record’s customer_id, movie_id, rental date, and return date can be uniquely identified by the id. There are no transitive dependencies (e.g., knowing the rental ID does not provide information about other attributes outside this table, such as customer details or movie details).
