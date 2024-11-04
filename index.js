@@ -2,7 +2,7 @@ const { Pool } = require("pg");
 
 // PostgreSQL connection
 const pool = new Pool({
-  user: "postgres", //This _should_ be your username, as it's the default one Postgres uses
+  user: "test-user", //This _should_ be your username, as it's the default one Postgres uses
   host: "localhost",
   database: "midterm_sprint", //This should be changed to reflect your actual database
   password: "your_database_password", //This should be changed to reflect the password you used when setting up Postgres
@@ -190,4 +190,6 @@ async function runCLI() {
   }
 }
 
-runCLI();
+runCLI().then(() => {
+  pool.end();
+});
