@@ -66,8 +66,8 @@ async function insertMovie(title, year, genre, director) {
   const query = `
       INSERT INTO Movies (title, release_year, genre, director)
       VALUES ($1, $2, $3, $4)`;
-  const values = [title, releaseYear, genre, director];
   try {
+    const values = [title, releaseYear, genre, director];
     await pool.query(query, values);
     console.log("Movie inserted successfully");
   } catch (error) {
@@ -105,6 +105,21 @@ async function displayMovies() {
  */
 async function updateCustomerEmail(customerId, newEmail) {
   // TODO: Add code to update a customer's email address
+  const query = `
+      UPDATE Customers
+      SET email = $1
+      WHERE id = $2`;
+
+  try {
+    const values = [newEmail, customerId];
+    await pool.query(query, values);
+    console.log("Customer email has been updated to ", newEmail);
+  } catch (error) {
+    console.error(
+      "An error occurred while updating the customer's email:",
+      error.message
+    );
+  }
 }
 
 /**
@@ -114,6 +129,16 @@ async function updateCustomerEmail(customerId, newEmail) {
  */
 async function removeCustomer(customerId) {
   // TODO: Add code to remove a customer and their rental history
+  try {
+    pool.query("DELETE FROM Customers WHERE id = $1", [customerId]);
+    pool.query("DELETE FROM Rentals WHERE customer_id = $1", [customerId]);
+    console.log(`Removed customer with ID: ${customerId} successfully`);
+  } catch (error) {
+    console.error(
+      `An error occurred while removing the customer with ID: ${customerId}`,
+      error.message
+    );
+  }
 }
 
 /**
